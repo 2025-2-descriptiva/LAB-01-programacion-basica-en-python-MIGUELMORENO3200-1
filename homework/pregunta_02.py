@@ -15,3 +15,18 @@ def pregunta_02():
     [('A', 8), ('B', 7), ('C', 5), ('D', 6), ('E', 14)]
 
     """
+    from collections import Counter
+    x = open("files/input/data.csv", "r").readlines() # Abrir archivo y leer todas las líneas
+    x = [z.replace("\n", "") for z in x] # Quitar saltos de línea al final
+    x = [",".join(z.strip().split("\t")) for z in x] # Reemplazar tabuladores por comas usando join y split
+    x = [z.split(",") for z in x]
+    list_c = [z[0] for z in x]
+
+    return sorted(Counter(list_c).items())
+
+print(pregunta_02())
+
+
+
+
+    

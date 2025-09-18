@@ -25,3 +25,21 @@ def pregunta_07():
      (9, ['A', 'B', 'E', 'A', 'A', 'C'])]
 
     """
+    x = open("files/input/data.csv", "r").readlines()
+    x = [z.replace("\n", "") for z in x]
+    x = [",".join(z.strip().split("\t")) for z in x]
+    x = [z.split(",") for z in x]
+
+    letras_por_numero = {}
+    for fila in x:
+        letra = fila[0]
+        numero = int(fila[1])
+        if numero not in letras_por_numero:
+            letras_por_numero[numero] = [letra]
+        else:
+            letras_por_numero[numero].append(letra)
+
+    resultado = [(numero,(letras_por_numero[numero])) for numero in sorted(letras_por_numero.keys())]
+    return resultado
+
+print(pregunta_07())

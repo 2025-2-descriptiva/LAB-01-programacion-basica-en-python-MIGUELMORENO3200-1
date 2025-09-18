@@ -24,3 +24,22 @@ def pregunta_09():
      'jjj': 18}}
 
     """
+    x = open("files/input/data.csv", "r").readlines()
+    x = [z.replace("\n", "") for z in x]
+    x = [",".join(z.strip().split("\t")) for z in x]
+    x = [z.split(",") for z in x]
+
+    conteo = {}
+
+    for fila in x:
+        for col in fila[5:]:  # desde la columna 6 en adelante
+            if ":" in col:
+                clave, _ = col.split(":")
+                if clave not in conteo:
+                    conteo[clave] = 1
+                else:
+                    conteo[clave] += 1
+
+    resultado = dict(sorted(conteo.items()))
+    return resultado
+pregunta_09()

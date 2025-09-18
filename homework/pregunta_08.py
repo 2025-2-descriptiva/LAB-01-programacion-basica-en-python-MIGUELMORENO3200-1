@@ -27,3 +27,29 @@ def pregunta_08():
      (9, ['A', 'B', 'C', 'E'])]
 
     """
+def pregunta_08():
+    """
+    Genere una lista de tuplas, donde el primer elemento de cada tupla
+    contiene  el valor de la segunda columna; la segunda parte de la tupla
+    es una lista con las letras (ordenadas y sin repetir letra) de la
+    primera columna que aparecen asociadas a dicho valor de la segunda
+    columna.
+    """
+    x = open("files/input/data.csv", "r").readlines()
+    x = [z.replace("\n", "") for z in x]
+    x = [",".join(z.strip().split("\t")) for z in x]
+    x = [z.split(",") for z in x]
+
+    letras_por_numero = {}
+    for fila in x:
+        letra = fila[0]
+        numero = int(fila[1])
+        if numero not in letras_por_numero:
+            letras_por_numero[numero] = set()   # inicializa como conjunto vacío
+        letras_por_numero[numero].add(letra)   # agrega la letra al conjunto
+
+    resultado = [(numero, sorted(letras_por_numero[numero])) 
+                 for numero in sorted(letras_por_numero.keys())]
+    return resultado
+
+

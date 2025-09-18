@@ -24,5 +24,19 @@ def pregunta_04():
      ('10', 2),
      ('11', 2),
      ('12', 3)]
-
     """
+    x = open("files/input/data.csv", "r").readlines()  # Abrir archivo y leer todas las líneas
+    x = [z.replace("\n", "") for z in x]  # Quitar saltos de línea al final
+    x = [",".join(z.strip().split("\t")) for z in x]  # Reemplazar tabuladores por comas
+    x = [z.split(",") for z in x]
+
+    registros_por_mes = {}
+    for z in x:
+        fecha = z[2]
+        mes = fecha.split("-")[1]
+        if mes in registros_por_mes:
+            registros_por_mes[mes] += 1
+        else:
+            registros_por_mes[mes] = 1
+
+    return sorted(registros_por_mes.items())
